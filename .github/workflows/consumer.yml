@@ -3,7 +3,7 @@ name: Consumer Contract Test
 on:
   push:
     branches:
-      - aravind-week04-gate4
+      - main
 
 jobs:
   consumer:
