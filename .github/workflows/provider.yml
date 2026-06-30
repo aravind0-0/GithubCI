@@ -1,9 +1,11 @@
-name: Consumer Contract Test
+name: Provider Contract Test
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: [ "Consumer Contract Test" ]   # 👈 wait for consumer
+    types:
+      - completed
+
 
 jobs:
   consumer:
