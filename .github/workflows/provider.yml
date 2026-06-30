@@ -2,13 +2,13 @@ name: Provider Contract Test
 
 on:
   workflow_run:
-    workflows: [ "Consumer Contract Test" ]   # 👈 wait for consumer
+    workflows: ["Consumer Contract Test"]
     types:
       - completed
 
 
 jobs:
-  consumer:
+  provider:
     runs-on: ubuntu-latest
 
     steps:
