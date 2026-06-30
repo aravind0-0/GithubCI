@@ -1,0 +1,54 @@
+name: Consumer Contract Test
+
+on:
+  push:
+    branches:
+      - aravind-week04-gate4
+
+jobs:
+  consumer:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '22'
+
+      - name: Cache Maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: maven-${{ runner.os }}-${{ hashFiles('pom.xml') }}
+          restore-keys: |
+            maven-${{ runner.os }}
+
+      - name: Verify Java
+        run: java -version
+
+      - name: Verify Maven
+        run: mvn -version
+
+      - name: Run Consumer Tests
+        run: mvn test -Dtest=CreateOrderTest
+
+      - name: Run Consumer Tests
+        run: mvn test -Dtest=GetOrderTest
+
+      - name: Run Consumer Tests
+        run: mvn test -Dtest=InventoryTest
+
+      - name: Show Generated Pact Files
+        run: |
+          ls -R target
+
+      - name: Publish Pact to Broker
+        run: |
+          mvn pact:publish \
+          -Dpact.broker.url=https://sdf.pactflow.io \
+          -Dpact.broker.token=85NnKjFbhXlAK3cdZ2bhRw \
+          -Dpact.consumer.version=1.0.
