@@ -33,7 +33,7 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMoc
 @ExtendWith({
         PactVerificationInvocationContextProvider.class
 })
-@PactFolder("target/pacts")
+//@PactFolder("target/pacts")
 public class OmsProviderVerificationTest {
 
     @RegisterExtension
